@@ -7,22 +7,22 @@ def get_view(page: ft.Page, azul_principal: str):
     """Retorna a view do Renomeador de Arquivos."""
 
     caminho_input = ft.TextField(
-        label="Caminho da pasta",
+        label="Ordnerpfad",
         width=400,
-        hint_text="Selecione a pasta com os arquivos a renomear",
+        hint_text="Wählen Sie den Ordner mit den Dateien zum Umbenennen aus",
     )
 
-    prefixo_input = ft.TextField(label="Prefixo", width=200)
-    extensao_input = ft.TextField(label="Extensão (opcional)", width=150, hint_text=".jpg, .txt, etc.")
+    prefixo_input = ft.TextField(label="Präfix", width=200)
+    extensao_input = ft.TextField(label="Erweiterung (optional)", width=150, hint_text=".jpg, .txt, usw.")
 
     modo_dropdown = ft.Dropdown(
         label="Modo",
         options=[
-            ft.dropdown.Option("1 - Todos os arquivos"),
-            ft.dropdown.Option("2 - Somente extensão informada"),
-            ft.dropdown.Option("3 - Do mais antigo ao mais recente"),
+            ft.dropdown.Option("1 - Alle Dateien"),
+            ft.dropdown.Option("2 - Nur angegebene Erweiterung"),
+            ft.dropdown.Option("3 - Vom ältesten zum neuesten"),
         ],
-        value="1 - Todos os arquivos",
+        value="1 - Alle Dateien",
         width=300,
     )
 
@@ -53,11 +53,11 @@ def get_view(page: ft.Page, azul_principal: str):
         opcao = int(modo_dropdown.value[0])  # Pega o número da opção (1, 2 ou 3)
 
         if not pasta or not Path(pasta).exists():
-            log_area.value = "❌ Caminho inválido. Selecione uma pasta válida."
+            log_area.value = "❌ Ungültiger Pfad. Bitte wählen Sie einen gültigen Ordner aus."
         elif not prefixo:
-            log_area.value = "⚠️ Informe um prefixo."
+            log_area.value = "⚠️ Geben Sie ein Präfix ein"
         else:
-            log_area.value = "⏳ Renomeando arquivos..."
+            log_area.value = "⏳ Dateien werden umbenannt..."
             page.update()
             try:
                 logs = renomear_arquivos(pasta, prefixo, extensao, opcao)
@@ -67,13 +67,13 @@ def get_view(page: ft.Page, azul_principal: str):
         page.update()
 
     botao_pasta = ft.ElevatedButton(
-        text="Selecionar Pasta",
+        text="Ordner auswählen",
         icon=ft.Icons.FOLDER_OPEN,
         on_click=selecionar_pasta,
     )
 
     botao_executar = ft.ElevatedButton(
-        text="Renomear",
+        text="Umbenennen",
         icon=ft.Icons.DRIVE_FILE_RENAME_OUTLINE,
         bgcolor=azul_principal,
         color=ft.Colors.WHITE,
@@ -82,8 +82,8 @@ def get_view(page: ft.Page, azul_principal: str):
 
     layout = ft.Column(
         [
-            ft.Text("Renomeador de Arquivos", size=28, weight=ft.FontWeight.BOLD, color=azul_principal),
-            ft.Text("Renomeia os arquivos de acordo com a escolha, podendo ser prefixos, extensões ou data. Segue o padrão: nome-01.doc, nome-02.doc", size=16, weight=ft.FontWeight.BOLD, color=azul_principal, text_align=ft.TextAlign.CENTER),
+            ft.Text("Datei-Umbenenner", size=28, weight=ft.FontWeight.BOLD, color=azul_principal),
+            ft.Text("Benennt die Dateien nach Ihrer Auswahl um, z.B. nach Präfix, Erweiterung oder Datum. Muster: name-01.docx, name-02.docx", size=16, weight=ft.FontWeight.BOLD, color=azul_principal, text_align=ft.TextAlign.CENTER),
             ft.Row([caminho_input, botao_pasta]),
             ft.Row([prefixo_input, extensao_input, modo_dropdown]),
             ft.Row([botao_executar]),

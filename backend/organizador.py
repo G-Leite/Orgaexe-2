@@ -4,15 +4,15 @@ from pathlib import Path
 
 
 CATEGORIAS = {
-    "Imagens": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg"],
-    "Documentos": [".pdf", ".docx", ".doc", ".txt", ".odt", ".rtf"],
-    "Planilhas": [".xlsx", ".xls", ".csv"],
-    "Apresentações": [".pptx", ".ppt", ".odp"],
-    "Vídeos": [".mp4", ".avi", ".mov", ".mkv"],
-    "Áudios": [".mp3", ".wav", ".ogg", ".flac"],
-    "Compactados": [".zip", ".rar", ".7z", ".tar", ".gz"],
-    "Executáveis": [".exe", ".msi", ".bat"],
-    "Outros": []
+    "Bilder": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg"],
+    "Dokumente": [".pdf", ".docx", ".doc", ".txt", ".odt", ".rtf"],
+    "Tabellen": [".xlsx", ".xls", ".csv"],
+    "Präsentationen": [".pptx", ".ppt", ".odp"],
+    "Videos": [".mp4", ".avi", ".mov", ".mkv"],
+    "Audiodateien": [".mp3", ".wav", ".ogg", ".flac"],
+    "Komprimierte": [".zip", ".rar", ".7z", ".tar", ".gz"],
+    "Ausführbare": [".exe", ".msi", ".bat"],
+    "Andere": []
 }
 
 
@@ -20,7 +20,7 @@ def organizar_arquivos(pasta: str) -> list[str]:
     """Organiza arquivos em subpastas por categoria."""
     pasta_path = Path(pasta)
     if not pasta_path.exists() or not pasta_path.is_dir():
-        raise FileNotFoundError(f"Pasta não encontrada: {pasta}")
+        raise FileNotFoundError(f"Ordner nicht gefunden: {pasta}")
     
     logs = []
     for categoria in CATEGORIAS.keys():
@@ -29,7 +29,7 @@ def organizar_arquivos(pasta: str) -> list[str]:
     for item in pasta_path.iterdir():
         if item.is_file():
             extensao = item.suffix.lower()
-            categoria = next((cat for cat, exts in CATEGORIAS.items() if extensao in exts), "Outros")
+            categoria = next((cat for cat, exts in CATEGORIAS.items() if extensao in exts), "Andere")
             destino = pasta_path / categoria / item.name
 
             contador = 1
@@ -38,10 +38,10 @@ def organizar_arquivos(pasta: str) -> list[str]:
                 contador += 1
 
             shutil.move(str(item), destino)
-            logs.append(f"Movido: {item.name} → {categoria}/{destino.name}")
+            logs.append(f"Verschoben: {item.name} → {categoria}/{destino.name}")
 
     if not logs:
-        logs.append("Nenhum arquivo para organizar.")
+        logs.append("Keine doppelten Dateien gefunden.")
     return logs
 
 

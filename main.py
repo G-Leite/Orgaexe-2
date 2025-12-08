@@ -67,7 +67,7 @@ def main(page: ft.Page):
         on_click=lambda e: alternar_tema(e),
     )
 
-    # AppBar superior minimalista
+    # AppBar superior 
     page.appbar = ft.AppBar(
         title=ft.Text("Orgaexe", color=azul_principal, weight=ft.FontWeight.BOLD),
         center_title=False,
@@ -86,10 +86,10 @@ def main(page: ft.Page):
         return ft.Container(
             content=ft.Column(
                 [
-                    ft.Text("Bem-vindo ao Orgaexe", size=32, weight=ft.FontWeight.BOLD, color=azul_principal),
+                    ft.Text("Willkommen bei Orgaexe", size=32, weight=ft.FontWeight.BOLD, color=azul_principal),
                     ft.Text(
-                        "Gerencie e organize e seus arquivos com facilidade. "
-                        "Escolha uma das ferramentas no menu lateral para começar.",
+                        "Organisieren Sie Ihre Dateien ganz einfach und machen Sie Ihren Tag produktiver."
+                        "Wählen Sie ein Werkzeug im seitlichen Menü, um zu starten.",
                         size=18,
                         text_align=ft.TextAlign.CENTER,
                     ),
@@ -123,10 +123,10 @@ def main(page: ft.Page):
         bgcolor=ft.Colors.BLUE_GREY_900,
         extended=False,
         destinations=[
-            ft.NavigationRailDestination(icon=ft.Icons.HOME, label="Início"),
-            ft.NavigationRailDestination(icon=ft.Icons.FOLDER, label="Organizar"),
-            ft.NavigationRailDestination(icon=ft.Icons.FILTER_NONE, label="Duplicados"),
-            ft.NavigationRailDestination(icon=ft.Icons.DRIVE_FILE_RENAME_OUTLINE, label="Renomear"),
+            ft.NavigationRailDestination(icon=ft.Icons.HOME, label="Start"),
+            ft.NavigationRailDestination(icon=ft.Icons.FOLDER, label="Organisieren"),
+            ft.NavigationRailDestination(icon=ft.Icons.FILTER_NONE, label="Duplikate"),
+            ft.NavigationRailDestination(icon=ft.Icons.DRIVE_FILE_RENAME_OUTLINE, label="Umbenennen"),
         ],
         on_change=lambda e: set_view(e.control.selected_index),
     )
@@ -159,7 +159,7 @@ def main(page: ft.Page):
             #RODAPÉ
             ft.Container(
                 content=ft.Text(
-                    "© 2025 Desenvolvido por Guilherme Ferreira Leite",
+                    "© 2025 G.F.L Melk",
                     size=14,
                     color=ft.Colors.GREY_500,
                     text_align=ft.TextAlign.CENTER,

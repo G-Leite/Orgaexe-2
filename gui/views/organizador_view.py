@@ -7,8 +7,8 @@ def get_view(page: ft.Page, azul_principal: str):
     """Retorna a view do Organizador de Arquivos."""
 
     caminho_input = ft.TextField(
-        label="Caminho da pasta",
-        hint_text="Selecione a pasta que deseja organizar",
+        label="Ordnerpfad",
+        hint_text="Wählen Sie den Ordner mit den Dateien zum Organisieren aus",
         width=400,
     )
 
@@ -35,9 +35,9 @@ def get_view(page: ft.Page, azul_principal: str):
     def executar_organizacao(e):
         pasta = caminho_input.value.strip()
         if not pasta or not Path(pasta).exists():
-            log_area.value = "❌ Caminho inválido. Selecione uma pasta válida."
+            log_area.value = "❌ Ungültiger Pfad. Bitte wählen Sie einen gültigen Ordner aus."
         else:
-            log_area.value = "⏳ Organizando arquivos..."
+            log_area.value = "⏳ Dateien werden organisiert…"
             page.update()
             try:
                 logs = organizar_arquivos(pasta)
@@ -48,13 +48,13 @@ def get_view(page: ft.Page, azul_principal: str):
 
 
     botao_pasta = ft.ElevatedButton(
-        text="Selecionar Pasta",
+        text="Ordner auswählen",
         icon=ft.Icons.FOLDER_OPEN,
         on_click=selecionar_pasta,
     )
 
     botao_executar = ft.ElevatedButton(
-        text="Organizar",
+        text="Organisieren",
         icon=ft.Icons.CHECK_CIRCLE,
         bgcolor=azul_principal,
         color=ft.Colors.WHITE,
@@ -63,8 +63,8 @@ def get_view(page: ft.Page, azul_principal: str):
 
     layout = ft.Column(
         [
-            ft.Text("Organizador de Arquivos", size=28, weight=ft.FontWeight.BOLD, color=azul_principal),
-            ft.Text("Organiza os arquivos da pasta selecionada por tipo.", size=16, weight=ft.FontWeight.BOLD, color=azul_principal, text_align=ft.TextAlign.CENTER),
+            ft.Text("Datei-Organizer", size=28, weight=ft.FontWeight.BOLD, color=azul_principal),
+            ft.Text("Organisiert die Dateien im ausgewählten Ordner nach Typ", size=16, weight=ft.FontWeight.BOLD, color=azul_principal, text_align=ft.TextAlign.CENTER),
             ft.Row([caminho_input, botao_pasta]),
             ft.Row([botao_executar]),
             ft.Divider(height=20, color="transparent"),

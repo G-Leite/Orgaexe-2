@@ -8,9 +8,9 @@ def mover_duplicados(pasta: str) -> list[str]:
     """Move arquivos duplicados (baseado em hash) para a pasta 'Duplicados'."""
     pasta_path = Path(pasta)
     if not pasta_path.exists() or not pasta_path.is_dir():
-        raise FileNotFoundError(f"Pasta não encontrada: {pasta}")
+        raise FileNotFoundError(f"Ordner nicht gefunden: {pasta}")
 
-    destino = pasta_path / "Duplicados"
+    destino = pasta_path / "Duplikate"
     destino.mkdir(exist_ok=True)
 
     hash_map: dict[str, list[Path]] = {}
@@ -39,8 +39,8 @@ def mover_duplicados(pasta: str) -> list[str]:
                     destino_arquivo = destino / f"{dup.stem}({contador}){dup.suffix}"
                     contador += 1
                 shutil.move(str(dup), destino_arquivo)
-                logs.append(f"Movido duplicado: {dup.name} → {destino_arquivo.name}")
+                logs.append(f"Duplikat verschoben: {dup.name} → {destino_arquivo.name}")
 
     if not logs:
-        logs.append("Nenhum arquivo duplicado encontrado.")
+        logs.append("Keine doppelten Dateien gefunden")
     return logs
