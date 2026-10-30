@@ -30,7 +30,7 @@ def renomear_arquivos(pasta: str, prefixo: str, extensao: Optional[str] = None, 
         arquivos = [f for f in arquivos if f.suffix.lower() == extensao.lower()]
 
     if not arquivos:
-        return ["Keine Dateien zum Umbenennen gefunden"]
+        return ["Nenhum arquivo encontrado para renomear."]
 
     # Ordenação
     if opcao == 3:
@@ -47,5 +47,5 @@ def renomear_arquivos(pasta: str, prefixo: str, extensao: Optional[str] = None, 
         arquivo.rename(novo_caminho)
         log.append(f"{arquivo.name} → {novo_nome}")
 
-    log.append(f"Insgesamt umbenannt: {len(arquivos)} Datei(en)")
+    log.append(f"Total renomeado: {len(arquivos)} arquivo(s).")
     return log
